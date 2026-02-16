@@ -1,13 +1,31 @@
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import type { Database } from '@/types/database';
-import { getRequiredEnv } from '@/lib/env';
+import { getOptionalEnv } from '@/lib/env';
 
 export async function createClient() {
     const cookieStore = await cookies();
 
-    const supabaseUrl = getRequiredEnv('NEXT_PUBLIC_SUPABASE_URL');
-    const anonKey = getRequiredEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+    const supabaseUrl = getOptionalEnv('NEXT_PUBLIC_SUPABASE_URL');
+    const anonKey = getOptionalEnv('NEXT_PUBLIC_SUPABASE_ANON_KEY');
+
+    // If Supabase env vars are missing, return a stub client so pages can render
+    // without crashing. This disables Supabase-dependent features gracefully.
+    if (!supabaseUrl || !anonKey) {
+        console.warn('Supabase not configured: NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY missing. Returning stub client.');
+        return {
+            auth: {
+                getUser: async () => ({ data: { user: null }, error: null }),
+            },
+            from: (_: string) => ({
+                select: async () => ({ data: [], error: null }),
+                insert: async () => ({ data: null, error: new Error('Supabase not configured') }),
+                update: async () => ({ data: null, error: new Error('Supabase not configured') }),
+                delete: async () => ({ data: null, error: new Error('Supabase not configured') }),
+                single: async () => ({ data: null, error: new Error('Supabase not configured') }),
+            }),
+        } as any;
+    }
 
     return createServerClient<Database>(
         supabaseUrl,
