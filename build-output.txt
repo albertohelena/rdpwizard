@@ -1,0 +1,41 @@
+﻿
+> prd-wizard@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 6.1s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/17) ...
+  Generating static pages using 7 workers (4/17) 
+  Generating static pages using 7 workers (8/17) 
+  Generating static pages using 7 workers (12/17) 
+Ô£ô Generating static pages using 7 workers (17/17) in 636.6ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ ãÆ /api/ai/generate-prd
+Ôö£ ãÆ /api/ai/generate-prompt
+Ôö£ ãÆ /api/ai/improve-idea
+Ôö£ ãÆ /api/api-keys
+Ôö£ ãÆ /api/projects
+Ôö£ ãÆ /auth/callback
+Ôö£ ãÆ /auth/confirm
+Ôö£ ãÆ /dashboard
+Ôö£ ãÆ /dashboard/history
+Ôö£ ãÆ /dashboard/projects/[projectId]/wizard
+Ôö£ ãÆ /dashboard/settings
+Ôö£ Ôùï /forgot-password
+Ôö£ Ôùï /login
+Ôöö Ôùï /register
+
+
+ãÆ Proxy (Middleware)
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+
