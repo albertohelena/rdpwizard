@@ -92,6 +92,7 @@ export async function POST(req: NextRequest) {
         });
     } catch (error) {
         console.error('[POST /api/ai/improve-idea]', error);
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+        const msg = (error as Error)?.message ?? 'Internal server error';
+        return NextResponse.json({ error: msg }, { status: 500 });
     }
 }

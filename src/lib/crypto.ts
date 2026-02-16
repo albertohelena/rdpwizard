@@ -1,10 +1,11 @@
 import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
+import { getRequiredEnv } from '@/lib/env';
 
 const ALGORITHM = 'aes-256-gcm';
 
 function getEncryptionKey(): Buffer {
-    const key = process.env.ENCRYPTION_KEY;
-    if (!key || key.length !== 64) {
+    const key = getRequiredEnv('ENCRYPTION_KEY');
+    if (key.length !== 64) {
         throw new Error(
             'ENCRYPTION_KEY must be a 64-character hex string (32 bytes). Generate with: openssl rand -hex 32'
         );

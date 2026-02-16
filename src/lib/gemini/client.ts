@@ -1,4 +1,5 @@
 import type { StreamChunk } from '@/types/wizard';
+import { getOptionalEnv } from '@/lib/env';
 
 const OPENAI_BASE = 'https://api.openai.com/v1';
 
@@ -22,7 +23,7 @@ interface GeminiResponse {
 }
 
 function getEnvOpenAIApiKey() {
-    return process.env.OPENAI_API_KEY;
+    return getOptionalEnv('OPENAI_API_KEY');
 }
 
 export async function callGemini(
